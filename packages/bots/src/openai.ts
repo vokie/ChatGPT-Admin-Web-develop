@@ -51,6 +51,12 @@ export class OpenAIBot extends AbstractBot {
     //use console.log to debug the response
     console.log(response);
     console.log(response.statusText);
+    console.log(response.ok);
+    console.log(response.redirected);
+    console.log(response.status);
+    console.log(response.type);
+    console.log(response.url);
+    console.log(JSON.stringify(response.headers));
 
     if (!response.ok) {
       throw new Error(`OpenAI API error: ${response.statusText}`);
