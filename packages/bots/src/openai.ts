@@ -35,7 +35,7 @@ export class OpenAIBot extends AbstractBot {
     const response2 = await fetch('https://api.openai.com/v1/chat/completions', {
       headers: {
         'Content-Type': 'application/json',
-        Authorization: 'Bearer ${this.apiKey}',
+        Authorization: `Bearer ${this.apiKey}`,
       },
       method: 'POST',
       body: JSON.stringify({
@@ -51,7 +51,7 @@ export class OpenAIBot extends AbstractBot {
       console.log({
         headers: {
           'Content-Type': 'application/json',
-          Authorization: 'Bearer ${this.apiKey}',
+          Authorization: `Bearer ${this.apiKey}`,
         },
         method: 'POST',
         body: JSON.stringify({
