@@ -52,9 +52,9 @@ export class OpenAIBot extends AbstractBot {
     console.log(response);
     console.log(response.statusText);
 
-    // if (!response.ok) {
-    //   throw new Error(`OpenAI API error: ${response.statusText}`);
-    // }
+    if (!response.ok) {
+      throw new Error(`OpenAI API error: ${response.statusText}`);
+    }
 
     const lines = streamToLineIterator(response.body!);
 
