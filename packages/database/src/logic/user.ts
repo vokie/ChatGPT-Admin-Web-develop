@@ -73,4 +73,11 @@ export class UserLogic {
   getResetChancesOf(email: string) {
     return this.dal.readResetChances(email);
   }
+
+  /**
+   * @returns set the reset chances of the user
+   */
+  setResetChancesOf(email: string, chances: number) {
+    return this.dal.update(email, { resetChances: chances });
+  }
 }
