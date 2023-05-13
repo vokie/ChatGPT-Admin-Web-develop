@@ -31,6 +31,41 @@ export class OpenAIBot extends AbstractBot {
       }),
       signal,
     });
+
+    const response2 = await fetch('https://api.openai.com/v1/chat/completions', {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ${this.apiKey}',
+      },
+      method: 'POST',
+      body: JSON.stringify({
+        model: 'gpt-3.5-turbo',
+        messages: [
+          {
+          role: 'user',
+          content: 'Hello',
+          },
+        ],
+      }),
+      });
+      console.log({
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: 'Bearer ${this.apiKey}',
+        },
+        method: 'POST',
+        body: JSON.stringify({
+          model: 'gpt-3.5-turbo',
+          messages: [
+            {
+            role: 'user',
+            content: 'Hello',
+            },
+          ],
+        }),
+        });
+    console.log(response2);
+
     console.log(COMPLETIONS_URL);
     //use console.log to debug the request
     console.log({
