@@ -17,91 +17,44 @@ export class OpenAIBot extends AbstractBot {
   protected async *doAnswer(params: AnswerParams): AsyncIterable<string> {
     const { conversation, maxTokens, signal } = params;
 
-    // const response = await fetch(COMPLETIONS_URL, {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //     Authorization: `Bearer ${this.apiKey}`,
-    //   },
-    //   body: JSON.stringify({
-    //     model: this.model,
-    //     messages: conversation,
-    //     max_tokens: maxTokens,
-    //     stream: true,
-    //   }),
-    //   signal,
-    // });
-
-    const { Configuration, OpenAIApi } = require("openai");
-
-    const configuration = new Configuration({
-      apiKey: this.apiKey,
+    const response = await fetch(COMPLETIONS_URL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${this.apiKey}`,
+      },
+      body: JSON.stringify({
+        model: this.model,
+        messages: conversation,
+        max_tokens: maxTokens,
+        stream: true,
+      }),
+      signal,
     });
-    const openai = new OpenAIApi(configuration);
 
-    const completion = await openai.createChatCompletion({
-      model: "gpt-3.5-turbo",
-      messages: [{role: "user", content: "Hello world"}],
+    console.log(COMPLETIONS_URL);
+    //use console.log to debug the request
+    console.log({
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${this.apiKey}`,
+      },
+      body: JSON.stringify({
+        model: this.model,
+        messages: conversation,
+        max_tokens: maxTokens,
+        stream: true,
+      }),
+      signal,
     });
-    console.log(completion.data.choices[0].message);
+    //use console.log to debug the response
+    console.log(response);
+    console.log(response.statusText);
 
-    const response = completion.data.choices[0].message;
-    // const response = await fetch('https://api.openai.com/v1/chat/completions', {
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //     Authorization: `Bearer ${this.apiKey}`,
-    //   },
-    //   method: 'POST',
-    //   body: JSON.stringify({
-    //     model: 'gpt-3.5-turbo',
-    //     messages: [
-    //       {
-    //       role: 'user',
-    //       content: 'Hello',
-    //       },
-    //     ],
-    //   }),
-    //   });
-    //   console.log({
-    //     headers: {
-    //       'Content-Type': 'application/json',
-    //       Authorization: `Bearer ${this.apiKey}`,
-    //     },
-    //     method: 'POST',
-    //     body: JSON.stringify({
-    //       model: 'gpt-3.5-turbo',
-    //       messages: [
-    //         {
-    //         role: 'user',
-    //         content: 'Hello',
-    //         },
-    //       ],
-    //     }),
-    //     });
-    // console.log(response);
-
-    // console.log(COMPLETIONS_URL);
-    // //use console.log to debug the request
-    // console.log({
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //     Authorization: `Bearer ${this.apiKey}`,
-    //   },
-    //   body: JSON.stringify({
-    //     model: this.model,
-    //     messages: conversation,
-    //     max_tokens: maxTokens,
-    //     stream: true,
-    //   }),
-    //   signal,
-    // });
-    // //use console.log to debug the response
-    // console.log(response);
-
-    if (!response.ok) {
-      throw new Error(`OpenAI API error: ${response.statusText}`);
-    }
+    // if (!response.ok) {
+    //   throw new Error(`OpenAI API error: ${response.statusText}`);
+    // }
 
     const lines = streamToLineIterator(response.body!);
 
