@@ -213,7 +213,7 @@ export const useChatStore = create<ChatStore>()(
         // save user's and bot's message
         get().updateCurrentSession((session) => {
           session.messages.push(userMessage);
-          session.messages.push(botMessage);
+          //session.messages.push(botMessage);
         });
 
         // make request 请求对话
