@@ -17,22 +17,22 @@ export class OpenAIBot extends AbstractBot {
   protected async *doAnswer(params: AnswerParams): AsyncIterable<string> {
     const { conversation, maxTokens, signal } = params;
 
-    const response = await fetch(COMPLETIONS_URL, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${this.apiKey}`,
-      },
-      body: JSON.stringify({
-        model: this.model,
-        messages: conversation,
-        max_tokens: maxTokens,
-        stream: true,
-      }),
-      signal,
-    });
+    // const response = await fetch(COMPLETIONS_URL, {
+    //   method: 'POST',
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //     Authorization: `Bearer ${this.apiKey}`,
+    //   },
+    //   body: JSON.stringify({
+    //     model: this.model,
+    //     messages: conversation,
+    //     max_tokens: maxTokens,
+    //     stream: true,
+    //   }),
+    //   signal,
+    // });
 
-    const response2 = await fetch('https://api.openai.com/v1/chat/completions', {
+    const response = await fetch('https://api.openai.com/v1/chat/completions', {
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${this.apiKey}`,
@@ -64,26 +64,26 @@ export class OpenAIBot extends AbstractBot {
           ],
         }),
         });
-    console.log(response2);
-
-    console.log(COMPLETIONS_URL);
-    //use console.log to debug the request
-    console.log({
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${this.apiKey}`,
-      },
-      body: JSON.stringify({
-        model: this.model,
-        messages: conversation,
-        max_tokens: maxTokens,
-        stream: true,
-      }),
-      signal,
-    });
-    //use console.log to debug the response
     console.log(response);
+
+    // console.log(COMPLETIONS_URL);
+    // //use console.log to debug the request
+    // console.log({
+    //   method: 'POST',
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //     Authorization: `Bearer ${this.apiKey}`,
+    //   },
+    //   body: JSON.stringify({
+    //     model: this.model,
+    //     messages: conversation,
+    //     max_tokens: maxTokens,
+    //     stream: true,
+    //   }),
+    //   signal,
+    // });
+    // //use console.log to debug the response
+    // console.log(response);
 
     if (!response.ok) {
       throw new Error(`OpenAI API error: ${response.statusText}`);
