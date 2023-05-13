@@ -32,9 +32,24 @@ export class OpenAIBot extends AbstractBot {
       signal,
     });
     console.log(COMPLETIONS_URL);
+    //use console.log to debug the request
+    console.log({
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${this.apiKey}`,
+      },
+      body: JSON.stringify({
+        model: this.model,
+        messages: conversation,
+        max_tokens: maxTokens,
+        stream: true,
+      }),
+      signal,
+    });
     //use console.log to debug the response
     console.log(response);
-    
+
     if (!response.ok) {
       throw new Error(`OpenAI API error: ${response.statusText}`);
     }
