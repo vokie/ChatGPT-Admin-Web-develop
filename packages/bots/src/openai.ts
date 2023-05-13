@@ -32,39 +32,53 @@ export class OpenAIBot extends AbstractBot {
     //   signal,
     // });
 
-    const response = await fetch('https://api.openai.com/v1/chat/completions', {
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${this.apiKey}`,
-      },
-      method: 'POST',
-      body: JSON.stringify({
-        model: 'gpt-3.5-turbo',
-        messages: [
-          {
-          role: 'user',
-          content: 'Hello',
-          },
-        ],
-      }),
-      });
-      console.log({
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${this.apiKey}`,
-        },
-        method: 'POST',
-        body: JSON.stringify({
-          model: 'gpt-3.5-turbo',
-          messages: [
-            {
-            role: 'user',
-            content: 'Hello',
-            },
-          ],
-        }),
-        });
-    console.log(response);
+    const { Configuration, OpenAIApi } = require("openai");
+
+    const configuration = new Configuration({
+      apiKey: this.apiKey,
+    });
+    const openai = new OpenAIApi(configuration);
+
+    const completion = await openai.createChatCompletion({
+      model: "gpt-3.5-turbo",
+      messages: [{role: "user", content: "Hello world"}],
+    });
+    console.log(completion.data.choices[0].message);
+
+    const response = completion.data.choices[0].message;
+    // const response = await fetch('https://api.openai.com/v1/chat/completions', {
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //     Authorization: `Bearer ${this.apiKey}`,
+    //   },
+    //   method: 'POST',
+    //   body: JSON.stringify({
+    //     model: 'gpt-3.5-turbo',
+    //     messages: [
+    //       {
+    //       role: 'user',
+    //       content: 'Hello',
+    //       },
+    //     ],
+    //   }),
+    //   });
+    //   console.log({
+    //     headers: {
+    //       'Content-Type': 'application/json',
+    //       Authorization: `Bearer ${this.apiKey}`,
+    //     },
+    //     method: 'POST',
+    //     body: JSON.stringify({
+    //       model: 'gpt-3.5-turbo',
+    //       messages: [
+    //         {
+    //         role: 'user',
+    //         content: 'Hello',
+    //         },
+    //       ],
+    //     }),
+    //     });
+    // console.log(response);
 
     // console.log(COMPLETIONS_URL);
     // //use console.log to debug the request

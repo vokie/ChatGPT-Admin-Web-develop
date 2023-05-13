@@ -32,5 +32,8 @@
   },
   "devDependencies": {
     "turbo": "latest"
+  },
+  "dependencies": {
+    "openai": "^3.2.1"
   }
 }
