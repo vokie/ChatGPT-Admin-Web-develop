@@ -63,7 +63,7 @@ export default function Page({
       setCurrentPage(0);
       setCount(Math.abs(gap) * 10);
     }
-    setCount();
+    //setCount();
   };
 
   if (isLoading) return <Loading />;
