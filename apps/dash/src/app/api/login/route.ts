@@ -9,11 +9,15 @@ export async function POST(req: NextRequest) {
     console.log(email);
     console.log(password);
     if (!(await userLogic.login(email, password))) {
+      console.log(123);
       return NextResponse.json({}, { status: 401 });
     }
     const role = await userLogic.getRoleOf(email);
 console.log(role);
-    if (role !== "admin") return NextResponse.json({}, { status: 403 });
+    if (role !== "admin") {
+      console.log(456);
+      return NextResponse.json({}, { status: 403 });
+    } 
 
     const sessionToken = await accessControlLogic.newJWT(email);
     if (sessionToken) {
