@@ -69,9 +69,12 @@ export default function Page() {
       <Grid xs={12}>
         <Card shadow width="100%" height="350px">
           <PlanStatus
-            freeCount={data!.plan_status?.free?? ''}
-            proCount={data!.plan_status?.pro?? ''}
-            premiumCount={data!.plan_status?.premium??''}
+            freeCount={0}
+            proCount={0}
+            premiumCount={0}
+            // freeCount={data!.plan_status?.free?? ''}
+            // proCount={data!.plan_status?.pro?? ''}
+            // premiumCount={data!.plan_status?.premium??''}
           />
         </Card>
       </Grid>
