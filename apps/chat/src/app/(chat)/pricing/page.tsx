@@ -40,7 +40,7 @@ const prices: Price[] = [
   {
     name: "Pro",
     price: {
-      monthly: 30,
+      monthly: 0.1,
       quarterly: 79,
       yearly: 259,
     },
