@@ -41,21 +41,24 @@ export default function Page() {
               <Input
                 disabled
                 label="Free"
-                placeholder={data!.plan_status?.free.toString()?? ''}
+                placeholder={''}
+                // placeholder={data!.plan_status?.free.toString()?? ''}
               />
             </Grid>
             <Grid xs={8}>
               <Input
                 disabled
                 label="Pro"
-                placeholder={data!.plan_status?.pro.toString()?? ''}
+                placeholder={''}
+                // placeholder={data!.plan_status?.pro.toString()?? ''}
               />
             </Grid>
             <Grid xs={8}>
               <Input
                 disabled
                 label="Premium"
-                placeholder={data!.plan_status?.premium.toString()??''}
+                placeholder={''}
+                // placeholder={data!.plan_status?.premium.toString()??''}
               />
             </Grid>
           </Grid.Container>
